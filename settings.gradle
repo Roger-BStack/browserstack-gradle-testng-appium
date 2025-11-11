@@ -1,0 +1,2 @@
+rootProject.name = 'browserstack-gradle-testng-appium'
+include 'android', 'ios'

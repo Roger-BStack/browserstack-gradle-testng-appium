@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java' // or other relevant plugin
+    sourceSets {
+        test {
+        }
+    }
+}
+
+tasks.register('mobiletests') {
+    println "Running All Test tasks"
+    doLast {
+        subprojects {
+            tasks.withType(Test).tap {
+                configureEach { testTask ->
+                    println "Detected Test task: ${testTask.path}"
+                    ignoreFailures true
+                    testTask.executeTests()
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,43 @@
+dependencies {
+    testImplementation 'org.testng:testng:7.5'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.13.0'
+    implementation 'io.appium:java-client:8.6.0'
+    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    implementation 'com.browserstack:browserstack-java-sdk:latest.release'
+}
+
+sourceCompatibility = '1.8'
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Test).configureEach {
+    systemProperties = System.properties as Map<String, ?>
+}
+
+tasks.register('sampleTest', Test) {
+    useTestNG() {
+        dependsOn("cleanTest")
+        useDefaultListeners = true
+        suites "src/test/resources/browserstack/sample-test.testng.xml"
+//        suites "../config/sample-test.testng.xml"
+        jvmArgs += "-javaagent:${configurations.testRuntimeClasspath.find { it.name.contains('browserstack-java-sdk') }}"
+        jvmArgs += "-Dbrowserstack.config=${rootProject.projectDir}/config/browserstack.ios.yml"
+    }
+}
+
+// Include sampleTest in default "test" execution
+test.finalizedBy sampleTest
+
+tasks.register('sampleLocalTest', Test) {
+    useTestNG() {
+        dependsOn("cleanTest")
+        useDefaultListeners = true
+        suites "src/test/resources/browserstack/sample-local-test.testng.xml"
+//        suites "../config/sample-local-test.testng.xml"
+        jvmArgs += "-javaagent:${configurations.testRuntimeClasspath.find { it.name.contains('browserstack-java-sdk') }}"
+        jvmArgs += "-Dbrowserstack.config=${rootProject.projectDir}/config/browserstack.ios.local.yml"
+    }
+}
