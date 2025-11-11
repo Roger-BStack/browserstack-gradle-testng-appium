@@ -21,15 +21,15 @@ subprojects {
 
 tasks.register('mobiletests') {
     println "Running All Test tasks"
-    doLast {
-        subprojects {
-            tasks.withType(Test).tap {
-                configureEach { testTask ->
-                    println "Detected Test task: ${testTask.path}"
-                    ignoreFailures true
-                    testTask.executeTests()
-                }
-            }
+    group = 'verification'
+    description = 'Runs all test tasks in all subprojects.'
+
+    def testTasks = subprojects.collect { it.tasks.withType(Test) }
+    testTasks.forEach {
+        it.forEach {
+            it.ignoreFailures = true
         }
     }
+
+    dependsOn testTasks
 }
