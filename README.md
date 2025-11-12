@@ -6,7 +6,7 @@ This repo contains samples for running Appium tests with TestNG, in Gradle subpr
 * Set credentials in the `BROWSERSTACK_USERNAME` and `BROWSERSTACK_ACCESS_KEY` environment variables (see below for details), or update credentials in the `browserstack.yml` file with your [BrowserStack Username and Access Key](https://www.browserstack.com/accounts/settings).
 
 ## Running tests:
-* To run only the sample tests, ofr Android and iOS, on BrowserStack, run `gradlew clean test`.
+* To run only the sample tests, for Android and iOS, on BrowserStack, run `gradlew clean test`.
 * To run All the tests on BrowserStack, including BrowserStack Local Sample Tests, run `gradlew clean mobiletests`.
 * To run the Android sample test on BrowserStack, run `gradlew clean :android:sampleTest`.
 * To run the iOS sample test on BrowserStack, run `gradlew clean :ios:sampleTest`.

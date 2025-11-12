@@ -44,3 +44,4 @@ bin/
 
 log/
 .idea/
+**/browserstack.err
