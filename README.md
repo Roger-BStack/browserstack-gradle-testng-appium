@@ -14,7 +14,7 @@ This repo contains samples for running Appium tests with TestNG, in Gradle subpr
 Understand how many parallel sessions you need by using our [Parallel Test Calculator](https://www.browserstack.com/automate/parallel-calculator?ref=github)
 
 ## Notes
-* You can view your test results on the [BrowserStack Automate dashboard](https://www.browserstack.com/automate)
+* You can view your test results on the [BrowserStack App Automate dashboard](https://www.browserstack.com/app-automate)
 * You can export the environment variables for the Username and Access Key of your BrowserStack account.
 
     * For Unix-like or Mac machines:
